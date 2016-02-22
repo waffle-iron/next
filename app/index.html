@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en" ng-app="donextApp">
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
   <title>Google Phone Gallery</title>
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
   <link rel="stylesheet" href="css/app.css">
@@ -13,6 +14,7 @@
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/firebase/firebase.js"></script>
   <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
@@ -22,17 +24,37 @@
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/services.js"></script>
+  <script src="js/services/authService.js"></script>
 </head>
 
-<body>
+<body ng-controller="appCtrl" layout="row" ng-cloak>
+  
+  <div ng-controller="sidenavCtrl" role="navigation" ng-include="'partials/sidenav.html'" class="layout-sidenav"></div>
 
-  <div class="view-container">
+  <div layout="column" tabindex="-1" role="main" flex="" class="layout-column flex">
     <md-toolbar>
-      toolbar
-    </md-toolbar>
-    <div ng-view class="view-frame"></div>
-  </div>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()" hide-gt-md>
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
 
+        <span flex></span>
+
+        <md-button class="md-icon-button" aria-label="More" ng-click="userLoaded()">
+          Connect
+          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content md-scroll-y="" layout="column" flex="" class="layout-column flex layout-padding">
+
+
+
+      <ng-view>
+        View Content
+      </ng-view>
+    </md-content>
+  </div>
 </body>
 
 </html>

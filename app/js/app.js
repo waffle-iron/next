@@ -2,17 +2,18 @@
 
 /* App Module */
 
-var phonecatApp = angular.module('phonecatApp', [
+var donextApp = angular.module('donextApp', [
   'ngRoute',
   'ngMaterial',
   'phonecatAnimations',
 
   'phonecatControllers',
   'phonecatFilters',
-  'phonecatServices'
+  'phonecatServices',
+  'authService'
 ]);
 
-phonecatApp.config(['$routeProvider',
+donextApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
@@ -30,4 +31,9 @@ phonecatApp.config(['$routeProvider',
       otherwise({
         redirectTo: '/phones'
       });
+  }]).run(['Auth', '$timeout',
+    function(Auth, $timeout){
+      $timeout(Auth.setUser, 6000);
   }]);
+
+
